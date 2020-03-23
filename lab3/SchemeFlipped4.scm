@@ -1,0 +1,21 @@
+(define (nand val1 val2)
+  (not (and val1 val2))
+)
+
+(define (xorGate val1 val2)
+  (and (nand val1 val2) (or val1 val2))
+)
+
+(define (main)
+  (display (xorGate #f #f))
+  (newline)
+  (display (xorGate #t #f))
+  (newline)
+  (display (xorGate #f #t))
+  (newline)
+  (display (xorGate #t #t))
+  (newline)
+)
+
+(main)
+(exit)

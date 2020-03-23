@@ -1,0 +1,20 @@
+(define (letterGrade grade)
+  (cond 
+   ((> grade 89) "A")
+   ((> grade 79) "B")
+   ((> grade 69) "C")
+   ((> grade 59) "D")
+   (else "F")
+)
+
+(define (main)
+  (display (letterGrade 0))
+  (newline)
+  (display (letterGrade 75))
+  (newline)
+  (display (letterGrade 95))
+  (newline)
+)
+
+(main)
+(exit)
