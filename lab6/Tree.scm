@@ -168,14 +168,31 @@
 (define (leafDisplay tree)
   (if (leaf? tree)
       tree
-      (count-leaves-in-forest (children tree))
+      (leafDisplayInForest (children tree))
   )
 )
 
-(define (createList forest)
+(define (leafDisplayInForest forest)
   (if (null? forest)
       '()
-      (+ (leafDisplay (car forest))
-         (createList (cdr forest)))
-  )
-)
+      (append (leafDisplay (car forest)) (leafDisplayInForest (cdr forest)))))
+
+(display (leafDisplay world-tree2))
+
+(newline)
+(display (leafDisplay world-tree2))
+
+
+;Problem 5
+(define (replace place1 place2 tree)
+  (if (equal? place1 (datum tree))
+      (make-node place2 (children tree))
+      (make-node (datum tree) (replace-in-forest place1 place2 (children tree)))))
+(define (replace-in-forest place1 place2 forest)
+  (if (null? forest) '() (cons (replace place1 place2 (car forest))
+                               (replace-in-forest place1 place2 (cdr forest)))))
+
+(newline)
+(display world-tree2)
+(newline)
+(display (replace 'gilroy 'tunak world-tree2))
