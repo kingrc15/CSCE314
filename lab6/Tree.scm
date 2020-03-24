@@ -121,6 +121,8 @@
 
 
 ; Problem 1
+(display "Problem 1")
+(newline)
 (display (car (cadddr (caddr (cdddr world-tree2)))))
 (newline)
 
@@ -140,6 +142,8 @@
   )
 )
 
+(display "Problem 2")
+(newline)
 (display (count-non-leaves world-tree2))
 (newline)
 
@@ -157,6 +161,8 @@
     )
   )
 
+(display "Problem 3")
+(newline)
 (display (first-child-tree 'china world-tree2))
 (newline)
 (display (first-child-tree 'liverpool world-tree2))
@@ -168,15 +174,22 @@
 (define (leafDisplay tree)
   (if (leaf? tree)
       tree
-      (leafDisplayInForest (children tree))
+      (display-leaves-in-forest (children tree))
   )
 )
 
-(define (leafDisplayInForest forest)
+(define (display-leaves-in-forest forest)
   (if (null? forest)
       '()
-      (append (leafDisplay (car forest)) (leafDisplayInForest (cdr forest)))))
+      (append (leafDisplay (car forest))
+         (display-leaves-in-forest (cdr forest)))
+  )
+)
 
+(newline)
+(newline)
+(display "Problem 4")
+(newline)
 (display (leafDisplay world-tree2))
 
 (newline)
@@ -186,13 +199,27 @@
 ;Problem 5
 (define (replace place1 place2 tree)
   (if (equal? place1 (datum tree))
-      (make-node place2 (children tree))
-      (make-node (datum tree) (replace-in-forest place1 place2 (children tree)))))
+      (make-node place2 '())
+      (make-node (datum tree) (replace-in-forest place1 place2 (children tree)))
+      )
+  )
+
 (define (replace-in-forest place1 place2 forest)
-  (if (null? forest) '() (cons (replace place1 place2 (car forest))
-                               (replace-in-forest place1 place2 (cdr forest)))))
+  (if (null? forest)
+      '()
+      (cons (replace place1 place2 (car forest))
+            (replace-in-forest place1 place2 (cdr forest))
+            )
+      )
+  )
 
 (newline)
+(newline)
+(display "Problem 5")
+(newline)
 (display world-tree2)
+(newline)
+(newline)
+(display (replace 'italy 'hello world-tree2))
 (newline)
 (display (replace 'gilroy 'tunak world-tree2))
